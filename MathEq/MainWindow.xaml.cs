@@ -59,8 +59,11 @@ namespace MathEq
                 }
                 else number = (ulong)(number * 3 + 1);
                 counter += 1;
+                if(!number.Equals(1337))
                 numberList.Add(counter.ToString() + ". " + number.ToString() + "\r\n");
                 /*___________________________________________________________________*/
+                else 
+                    numberList.Add(counter.ToString() + ". " + number.ToString()+ " :) " + "\r\n");
             }
             foreach (string data in numberList)
             {
