@@ -49,25 +49,25 @@ namespace MathEq
             {
                 // ALL THE MATH
                 /*___________________________________________________________________*/
-                if (number == 1)
+                if (number == 1)// Checks if the number is equal to 1 if so break
                 {
                     break;
                 }
-                if (number % 2 == 0)
+                if (number % 2 == 0) // Checks if the number is even. If so slice it in half
                 {
                     number = (ulong)(number / 2);
                 }
-                else number = (ulong)(number * 3 + 1);
+                else number = (ulong)(number * 3 + 1); // If the number is not even multiply it by 3 and add 1 on top of that.
                 counter += 1;
-                if(!number.Equals(1337))
-                numberList.Add(counter.ToString() + ". " + number.ToString() + "\r\n");
+                if(!number.Equals(1337)) // Checks if any of the numbers are equal to 1337
+                numberList.Add(counter.ToString() + ". " + number.ToString() + "\r\n"); // if the number != 1337 just add the number
                 /*___________________________________________________________________*/
                 else 
-                    numberList.Add(counter.ToString() + ". " + number.ToString()+ " :) " + "\r\n");
+                    numberList.Add(counter.ToString() + ". " + number.ToString()+ " :) " + "\r\n"); // if the number DOES equal to 1337 add a smilet. Just for fun:)
             }
             foreach (string data in numberList)
             {
-                textBox1.AppendText(data);
+                textBox1.AppendText(data); // Writes the numberlist into the program
             }
         }
 
@@ -80,12 +80,11 @@ namespace MathEq
         {
             //Saves the data
             /*___________________________________________________________________*/
-            FileStream stream = File.Open(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Collatz Conjecture.txt", FileMode.Create);
-            foreach (string data in numberList)
+            FileStream stream = File.Open(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Collatz Conjecture.txt", FileMode.Create); // Opens a filestream to the desktop to save Collatz Conjecture.txt
+            foreach (string data in numberList) // Does the same as the foreach did earlier but with a diffrent goal
             {
                 byte[] temp = new UTF8Encoding(true).GetBytes(data.ToString());
-                stream.Write(temp, 0, data.ToString().Length);
-
+                stream.Write(temp, 0, data.ToString().Length); // Adds the data to the txt file
             }
             stream.Close();
             /*___________________________________________________________________*/

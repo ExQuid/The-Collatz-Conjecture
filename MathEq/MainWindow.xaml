@@ -14,7 +14,7 @@
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="10,330,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="425" TabIndex="1" TextChanged="textBox_TextChanged" Grid.ColumnSpan="2"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,314,0,0" TextWrapping="Wrap" Text="Enter a valid integer within UINT64!" VerticalAlignment="Top"/>
         <Button x:Name="button" Content="Calculate" HorizontalAlignment="Left" Margin="48,330,0,0" VerticalAlignment="Top" Width="75" Click="button_Click" Grid.Column="1"/>
-        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,8,0,0" TextWrapping="Wrap" Text="Output window" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"><Run Text="Output windo"/><Run Text="w"/></TextBlock>
         <Button x:Name="button1" Content="Clear" HorizontalAlignment="Left" Margin="47.696,5,0,0" VerticalAlignment="Top" Width="75" Click="button1_Click" RenderTransformOrigin="0.333,0.477" Grid.Column="1"/>
         <Button x:Name="button2" Content="Save" HorizontalAlignment="Left" Margin="370,5,0,0" VerticalAlignment="Top" Width="75" Click="button2_Click" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" ToolTip="Saves the calculation to the desktop">
             <Button.RenderTransform>
