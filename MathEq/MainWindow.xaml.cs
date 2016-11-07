@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.Windows.Forms;
 
 namespace MathEq
 {
@@ -34,7 +35,7 @@ namespace MathEq
         {
             if (!Regex.IsMatch(textBox.Text, "^[0-9]*$")) //Checks if there are letters in the input
             {
-                MessageBox.Show("Please enter NUMBERS!", "Logic Error", MessageBoxButton.OK, MessageBoxImage.Error); // Sends an error box if letter is entered
+                System.Windows.MessageBox.Show("Please enter NUMBERS!", "Logic Error", MessageBoxButton.OK, MessageBoxImage.Error); // Sends an error box if letter is entered
                 textBox.Clear();
             }
         }
@@ -59,11 +60,11 @@ namespace MathEq
                 }
                 else number = (ulong)(number * 3 + 1); // If the number is not even multiply it by 3 and add 1 on top of that.
                 counter += 1;
-                if(!number.Equals(1337)) // Checks if any of the numbers are equal to 1337
-                numberList.Add(counter.ToString() + ". " + number.ToString() + "\r\n"); // if the number != 1337 just add the number
+                if (!number.Equals(1337)) // Checks if any of the numbers are equal to 1337
+                    numberList.Add(counter.ToString() + ". " + number.ToString() + "\r\n"); // if the number != 1337 just add the number
                 /*___________________________________________________________________*/
-                else 
-                    numberList.Add(counter.ToString() + ". " + number.ToString()+ " :) " + "\r\n"); // if the number DOES equal to 1337 add a smilet. Just for fun:)
+                else
+                    numberList.Add(counter.ToString() + ". " + number.ToString() + " :) " + "\r\n"); // if the number DOES equal to 1337 add a smilet. Just for fun:)
             }
             foreach (string data in numberList)
             {
@@ -80,7 +81,12 @@ namespace MathEq
         {
             //Saves the data
             /*___________________________________________________________________*/
-            FileStream stream = File.Open(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Collatz Conjecture.txt", FileMode.Create); // Opens a filestream to the desktop to save Collatz Conjecture.txt
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.FileName = "CollatzConjecture.txt";
+            dialog.Filter = "Text File (.txt)|*.txt";
+            if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK) return;
+
+            FileStream stream = File.Open(dialog.FileName, FileMode.Create); // Opens a filestream to the desktop to save Collatz Conjecture.txt
             foreach (string data in numberList) // Does the same as the foreach did earlier but with a diffrent goal
             {
                 byte[] temp = new UTF8Encoding(true).GetBytes(data.ToString());
