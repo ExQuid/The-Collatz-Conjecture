@@ -1,47 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Text.RegularExpressions;
-using System.IO;
-using System.Windows.Forms;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
+using MessageBox = System.Windows.MessageBox;
 
 namespace MathEq
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for TCC_Client.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TCC_Client : MetroWindow
     {
-        List<string> numberList = new List<string>(); // Creates the list for the numbers
-        public MainWindow()
+        public TCC_Client()
         {
             InitializeComponent();
-            textBox1.VerticalScrollBarVisibility = ScrollBarVisibility.Visible; // Creates a scrollbar for the result box
-            textBox1.IsReadOnly = true; // Makes sure the user can´t edit the result box
+        }
+        List<string> numberList = new List<string>(); // Creates the list for the numbers
+
+        private async void btn_visitgithub_Click(object sender, RoutedEventArgs e)
+        {
+            var link = "https://github.com/exquid/";
+            MessageDialogResult result = await this.ShowMessageAsync("Are you sure you want to visit webpage?", "Are you sure you want to visit " + link, MessageDialogStyle.AffirmativeAndNegative);
+            if (result == MessageDialogResult.Affirmative)
+                System.Diagnostics.Process.Start(link);
+            else return;
         }
 
-        private void textBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void button1_Click(object sender, RoutedEventArgs e)
         {
-            if (!Regex.IsMatch(textBox.Text, "^[0-9]*$")) //Checks if there are letters in the input
+            textBox1.Text = ""; //Clears the textbox if the clear button is pressed
+        }
+
+        private async void button_Click(object sender, RoutedEventArgs e)
+        {
+            try
             {
-                System.Windows.MessageBox.Show("Please enter NUMBERS!", "Logic Error", MessageBoxButton.OK, MessageBoxImage.Error); // Sends an error box if letter is entered
-                textBox.Clear();
+                ulong.Parse(textBox.Text);
             }
-        }
+            catch
+            {
+                await this.ShowMessageAsync("Logic Error", "Please enter NUMBERS!");
+                return;
+            }
 
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
+
             int counter = 0; //Creates a the counter to count how many results there are
             ulong number = ulong.Parse(textBox.Text); //Makes the input into a ulong(UINT64)
             numberList.Clear(); // Clears the list of numbers if there are any
@@ -71,11 +87,6 @@ namespace MathEq
             }
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            textBox1.Text = ""; //Clears the textbox if the clear button is pressed
-        }
-
         private void button2_Click(object sender, RoutedEventArgs e)
         {
             //Saves the data
@@ -94,6 +105,17 @@ namespace MathEq
             }
             stream.Close();
             /*___________________________________________________________________*/
+        }
+
+
+        private async void textBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+           
+        }
+
+        private void textBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+
         }
     }
 }
