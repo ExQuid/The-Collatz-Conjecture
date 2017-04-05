@@ -59,11 +59,12 @@ namespace MathEq
                     number = (ulong)(number / 2);
                 }
                 else number = (ulong)(number * 3 + 1); // If the number is not even multiply it by 3 and add 1 on top of that.
-
                 counter += 1;
-
-                numberList.Add(counter.ToString() + ". " + number.ToString() + "\r\n"); // Adds the number to the list
+                if (!number.Equals(1337)) // Checks if any of the numbers are equal to 1337
+                    numberList.Add(counter.ToString() + ". " + number.ToString() + "\r\n"); // if the number != 1337 just add the number
                 /*___________________________________________________________________*/
+                else
+                    numberList.Add(counter.ToString() + ". " + number.ToString() + " :) " + "\r\n"); // if the number DOES equal to 1337 add a smilet. Just for fun:)
             }
             foreach (string data in numberList)
             {
@@ -83,7 +84,6 @@ namespace MathEq
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.FileName = "CollatzConjecture.txt";
             dialog.Filter = "Text File (.txt)|*.txt";
-
             if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK) return;
 
             FileStream stream = File.Open(dialog.FileName, FileMode.Create); // Opens a filestream to the desktop to save Collatz Conjecture.txt
